@@ -1,4 +1,5 @@
 from __future__ import print_function
+from datetime import datetime as dt
 import cv2
 import numpy as np
 from crop import crop
@@ -25,8 +26,9 @@ def recognize(imgname='photos\\tough6.jpg', output='output.txt', desired='texts\
     print('Accuracy: ' + str(test_accuracy(scan_res=output, desired=desired)))
 
 
-def recognize_many(img_names_file):
-    with open(img_names_file) as f:
+def recognize_many(img_names_file,
+                   out='output/' + str(dt.now()).replace(':', '-')[:16]):
+    with open(out + img_names_file) as f:
         names = f.readlines()
     names = [x.strip() for x in names]
     for name in names:
